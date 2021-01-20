@@ -14,3 +14,17 @@ right_justify(s)
 right_justify(t)
 right_justify(s)
 
+# Exercise 3-2
+def do_twice(f,string):
+    f(string)
+    f(string)
+
+def print_spam():
+    print('spam')
+
+def print_twice(text):
+    print(text)
+    print(text)
+
+do_twice(print_twice,s+t+s)
+
