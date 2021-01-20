@@ -28,26 +28,60 @@ def print_twice(text):
 
 do_twice(print_twice,s+t+s)
 
-# Exercise 3-3
+# Exercise 3-3.1
 
-def draw():
-    draw_width()
-    draw_height()
-    draw_height()
-    draw_height()
-    draw_height()
-    draw_width()
-    draw_height()
-    draw_height()
-    draw_height()
-    draw_height()
-    draw_width()
+def do_twice(f):
+    f()
+    f()
+
+def do_four(f):
+    do_twice(f)
+    do_twice(f)
     
-    
-def draw_width():
-    print('+','- '*4,'+','- '*4,'+')
 
-def draw_height():
-    print('|','  '*4,'|','  '*4,'|')
+def print_width():
+    print('+ - - - -', end=' ')
 
-draw()
+def print_height():
+    print('|        ', end=' ')
+
+def print_width_twice():
+    do_twice(print_width)
+    print('+')
+
+def print_height_twice():
+    do_twice(print_height)
+    print('|')
+
+def print_row():
+    print_width_twice()
+    do_four(print_height_twice)
+
+def print_grid():
+    do_twice(print_row)
+    print_width_twice()
+
+print_grid()
+
+
+
+
+# Exercise 3-3.2
+
+def print_width_four():
+    do_four(print_width)
+    print('+')
+
+def print_height_four():
+    do_four(print_height)
+    print('|')
+
+def print_row_four():
+    print_width_four()
+    do_four(print_height_four)
+
+def print_grid_four_col():
+    do_four(print_row_four)
+    print_width_four()
+
+print_grid_four_col()
