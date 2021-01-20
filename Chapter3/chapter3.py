@@ -28,3 +28,26 @@ def print_twice(text):
 
 do_twice(print_twice,s+t+s)
 
+# Exercise 3-3
+
+def draw():
+    draw_width()
+    draw_height()
+    draw_height()
+    draw_height()
+    draw_height()
+    draw_width()
+    draw_height()
+    draw_height()
+    draw_height()
+    draw_height()
+    draw_width()
+    
+    
+def draw_width():
+    print('+','- '*4,'+','- '*4,'+')
+
+def draw_height():
+    print('|','  '*4,'|','  '*4,'|')
+
+draw()
