@@ -8,6 +8,6 @@ def polygon(t,n,len):
         t.fd(len)
         t.rt(degree)
 
-polygon(bob,6,100)
+polygon(bob,5,100)
 
 turtle.mainloop()
