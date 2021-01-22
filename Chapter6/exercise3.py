@@ -19,9 +19,17 @@ def last(word):
 def middle(word):
     return word[1:-1]
 
-const = "nn01nn"
+const = ""
+
+def check_string():
+    const = input("Enter string\n")
+    if(len(const)):
+        print(is_palindrome(const))
+    else:
+        print("The empty string")
+
+check_string()
 # print(first(const))
 # print(last(const))
 # print(len(middle(const)))
 # print(const)
-print(is_palindrome(const))
