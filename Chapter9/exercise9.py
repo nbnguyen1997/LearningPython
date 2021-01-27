@@ -10,28 +10,25 @@ def find_age(number):
     count = 0
     flag = False
     for age_mom_at_born in range(18,80):
-        for age in range(age_mom_at_born,100):
-            if reverse_number(age) == age - age_mom_at_born:
+        for your_mom_age_currently in range(age_mom_at_born,100):
+            your_age_currently = your_mom_age_currently - age_mom_at_born
+            if reverse_number(your_mom_age_currently) == your_age_currently :
                 count += 1
                 if count == number :
-                    print("Or")
-                    print("your'age current : ",age - age_mom_at_born)
-                    print("your mom's age current: ",age)
+                    print("your'age current : ",your_age_currently)
+                    print("your mom's age current: ",your_mom_age_currently)
                     count = 0
                     flag = True
                     break
         count = 0
-    if flag == False:
-        print("You enter wrong!!!")
             
-        #     flag = False
-            
-def function_input():
-    while True:
-        string = input("How many times has it happened?(<9)\n(Enter any letter to quick) ")
-        if len(string) == 1 and '0' <=string <= '8':
-            find_age(int(string))
-        else:
-            break
+find_age(8)
+# def function_input():
+#     while True:
+#         string = input("How many times has it happened?(<9)\n(Enter any letter to quick) ")
+#         if len(string) == 1 and '0' <=string <= '8':
+#             find_age(int(string))
+#         else:
+#             break
 
-function_input()
+# function_input()
