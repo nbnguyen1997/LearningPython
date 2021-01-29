@@ -27,7 +27,7 @@ def make_word_dict():
 
 
 def rotate_pairs(word, word_dict):
-    for i in range(1, 14):
+    for i in range(1, 25):
         rotated = rotate_word(word, i)
         if rotated in word_dict:
             print(word, i, rotated)
