@@ -25,11 +25,20 @@ def handle_file():
 
 di = handle_file()
 
-def print_di(di):
+def print_dict_max_len(di):
+    max_len = 0
+    key_max =""
     for key in di:
-        if len(di[key]) > 1 :
-            print(di[key])
+        len_result = len(di[key])
+        # if len_result > 1 :
+        #     print(di[key])
+        
+        if len_result > max_len:
+            max_len = len_result
+            key_max = key
+
+    return di[key_max]
 # print("".join(['a', 'b', 'b', 'e', 'y']))
 # print("".join(['a', 'a']))
 
-print_di(di)
+print(print_dict_max_len(di))
