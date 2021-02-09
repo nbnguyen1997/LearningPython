@@ -25,20 +25,29 @@ def handle_file():
 
 di = handle_file()
 
-def print_dict_max_len(di):
-    max_len = 0
-    key_max =""
+def print_di(di):
     for key in di:
-        len_result = len(di[key])
-        # if len_result > 1 :
-        #     print(di[key])
-        
-        if len_result > max_len:
-            max_len = len_result
-            key_max = key
+        if len(di[key]) > 1 :
+            print(di[key])
 
-    return di[key_max]
-# print("".join(['a', 'b', 'b', 'e', 'y']))
-# print("".join(['a', 'a']))
+def print_dict_order(di,len_bingo = 1):
+    list_item = []
 
-print(print_dict_max_len(di))
+    if len_bingo == 1:
+        for value in di.values():
+            if len(value) > len_bingo :
+                list_item.append((len(value),value))
+    else:
+        for value in di.values():
+            if len(value) == len_bingo :
+                list_item.append((len(value),value))
+
+    list_item.sort()
+
+    for item in list_item:
+        print(item)
+
+
+# print_dict_order(di)
+
+print_dict_order(di,8)
