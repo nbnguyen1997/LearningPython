@@ -17,6 +17,12 @@ def make_dict():
                 di[item] = 1
             else:
                 di[item] += 1
+        else:
+            if i not in di:
+                di[i] = 1
+            else:
+                di[i] += 1
+
         di["total_words"] += 1
 
     return di
