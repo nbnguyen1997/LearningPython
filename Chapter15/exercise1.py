@@ -55,6 +55,22 @@ def rect_in_circle(circle, rectangle):
     return True
 
 
+def rect_circle_overlap(circle, rectangle):
+    point = copy.copy(rectangle.cornor)
+    width = rectangle.width
+    height = rectangle.height
+    if point_in_circle(circle, point):
+        return False
+    if point_in_circle(circle, Point(point.x, point.y + height)):
+        return False
+    if point_in_circle(circle, Point(point.x + width, point.y)):
+        return False
+    if point_in_circle(circle, Point(point.x + width, point.y + height)):
+        return False
+
+    return True
+
+
 cir = Circle(Point(150, 100), 75)
 
 # print(distance(Point(3, 0), Point(0, 4)))
@@ -64,4 +80,6 @@ print(point_in_circle(cir, Point(80, 30)))  # False
 rect = Rectangle(40, 20, Point(120, 80))
 print(rect_in_circle(cir, rect))  # True
 
+rect1 = Rectangle(40, 20, Point())
+print(rect_circle_overlap(cir, rect1))
 # print(cir.center, cir.radius)
