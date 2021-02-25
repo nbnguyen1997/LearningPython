@@ -1,4 +1,5 @@
 import math
+import copy
 
 
 class Point:
@@ -38,9 +39,29 @@ def distance(point_1, point_2):
     )
 
 
+def rect_in_circle(circle, rectangle):
+    point = copy.copy(rectangle.cornor)
+    width = rectangle.width
+    height = rectangle.height
+    if not point_in_circle(circle, point):
+        return False
+    if not point_in_circle(circle, Point(point.x, point.y + height)):
+        return False
+    if not point_in_circle(circle, Point(point.x + width, point.y)):
+        return False
+    if not point_in_circle(circle, Point(point.x + width, point.y + height)):
+        return False
+
+    return True
+
+
 cir = Circle(Point(150, 100), 75)
 
 # print(distance(Point(3, 0), Point(0, 4)))
 print(point_in_circle(cir, Point(130, 90)))  # True
 print(point_in_circle(cir, Point(80, 30)))  # False
+
+rect = Rectangle(40, 20, Point(120, 80))
+print(rect_in_circle(cir, rect))  # True
+
 # print(cir.center, cir.radius)
