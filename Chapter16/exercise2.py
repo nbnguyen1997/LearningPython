@@ -1,48 +1,40 @@
 import datetime
+import time
 
 
-def check_date(date):
-    year = date.year
-    month = date.month
-    day = date.day
+def birthday(birthday):
+    cur = datetime.datetime.today()
+    age = cur.year - birthday.year
+    birthday_in_year = datetime.datetime(cur.year, birthday.month, birthday.day)
 
-    list_month_1 = [1, 3, 5, 7, 8, 10, 12]
-    list_month_2 = [4, 6, 9, 11]
+    days = (cur - birthday_in_year).days
 
-    if day < 1 or month < 1 or month > 12:
-        return False
+    days_of_birth = 0
+    if days < 0:
+        days_of_birth = -days
+    if days > 0:
+        date = datetime.datetime(cur.year + 1, birthday.month, birthday.day)
+        days_of_birth = (date - cur).days
 
-    if month in list_month_1:
-        if day > 31:
-            return False
-    elif month in list_month_2:
-        if day > 30:
-            return False
-    elif month == 2:
-        if check_year(year):
-            if day > 29:
-                return False
-        else:
-            if day > 28:
-                return False
-    return True
+    print("Your current age is %d" % age)
+
+    if days_of_birth == 0:
+        print("Happy birth day to you!!!")
+    else:
+        print(
+            "Your next birthday: %d day, %.2d:%.2d:%.2d"
+            % (days_of_birth - 1, 23 - cur.hour, 59 - cur.minute, 60 - cur.second)
+        )
 
 
-def check_year(year):
-    if year % 4 == 0 and year % 100 != 0 or year % 400 == 0:
-        return True
-    return False
+da = datetime.datetime.today()
+
+birth_day = datetime.datetime(2000, 2, 26)
+
+birth_day_2 = datetime.datetime(2000, 1, 1)
 
 
-def get_year(date1, date2):
-    return
-
-
-da = datetime.date.today()
-# month = datetime.year(da)
-# print(month)
-bit = datetime.date(2000, 2, 14)
-print(check_date(bit))
-# print(dir(da.max.day))
-
-# print("Today is %s " % (da.strftime("%A")))
+print("Today is %s " % (da.strftime("%A")))
+birthday(birth_day)
+print()
+birthday(birth_day_2)
