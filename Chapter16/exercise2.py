@@ -27,6 +27,13 @@ def birthday(birthday):
         )
 
 
+def double_day(birth_day_1, birth_day_2):
+    if birth_day_1 > birth_day_2:
+        return birth_day_1 + (birth_day_1 - birth_day_2)
+    else:
+        return birth_day_2 + (birth_day_2 - birth_day_1)
+
+
 da = datetime.datetime.today()
 
 birth_day = datetime.datetime(2000, 2, 26)
@@ -38,3 +45,5 @@ print("Today is %s " % (da.strftime("%A")))
 birthday(birth_day)
 print()
 birthday(birth_day_2)
+print()
+print("Your Double Day :", double_day(birth_day, birth_day_2))
