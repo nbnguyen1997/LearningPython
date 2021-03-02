@@ -1,4 +1,5 @@
 from Card import Card
+import random
 
 
 class Deck:
@@ -13,7 +14,29 @@ class Deck:
         return "\n".join(str(item) for item in
                          self.cards)
 
+    def pop_card(self):
+        return self.cards.pop()
+
+    def add_card(self, card):
+        self.cards.append(card)
+
+    def shuffle_card(self):
+        random.shuffle(self.cards)
+
+    def sort_card(self):
+        self.cards.sort()
+
 
 de = Deck()
 
+de.shuffle_card()
+
+print(de)
+
+remove = de.pop_card()
+print("\n")
+print(remove)
+
+de.sort_card()
+print("\n")
 print(de)
