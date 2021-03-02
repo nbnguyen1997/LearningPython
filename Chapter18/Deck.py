@@ -1,4 +1,5 @@
 from Card import Card
+
 import random
 
 
@@ -27,5 +28,22 @@ class Deck:
         self.cards.sort()
 
     def move_card(self, hand, num):
-        for i in range(num):
-            hand.add_card(self.pop_card())
+        if isinstance(hand, Deck):
+            for i in range(num):
+                hand.add_card(self.pop_card())
+        else:
+            hand["cards"].append(self.pop_card())
+
+    def deal_hands(self, num_hands, num_cards_per_hand):
+        hands = []
+        for hand_id in range(num_hands):
+            hand = dict()  # because we cannot call the Hand class
+            hand["label"] = "Hand " + str(hand_id)
+            hand["cards"] = []
+            hands.append(hand)
+
+        for i in range(num_cards_per_hand):
+            for hand in hands:
+                self.move_card(hand, 1)
+
+        return hands
