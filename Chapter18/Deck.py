@@ -29,6 +29,3 @@ class Deck:
     def move_card(self, hand, num):
         for i in range(num):
             hand.add_card(self.pop_card())
-
-
-de = Deck()
