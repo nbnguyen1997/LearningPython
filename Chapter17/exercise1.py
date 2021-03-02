@@ -10,13 +10,16 @@ class Time:
         minute: int
         second: int or float
         """
-        self.hour = hour
-        self.minute = minute
-        self.second = second
+        self.seconds = hour * 3600 + minute * 60 + second
 
     def __str__(self):
         """Returns a string representation of the time."""
-        return '%.2d:%.2d:%.2d' % (self.hour, self.minute, self.second)
+        # minutes, second = divmod(self.seconds, 60)
+        minutes, second = divmod(self.seconds, 60)
+        # print(minutes, second)
+        hour, minute = divmod(minutes, 60)
+        # print(hour, minute)
+        return '%.2d:%.2d:%.2d' % (hour, minute, second)
 
     def print_time(self):
         """Prints a string representation of the time."""
@@ -24,13 +27,12 @@ class Time:
 
     def time_to_int(self):
         """Computes the number of seconds since midnight."""
-        minutes = self.hour * 60 + self.minute
-        seconds = minutes * 60 + self.second
-        return seconds
+
+        return self.seconds
 
     def is_after(self, other):
         """Returns True if t1 is after t2; false otherwise."""
-        return self.time_to_int() > other.time_to_int()
+        return self.seconds > other.seconds
 
     def __add__(self, other):
         """Adds two Time objects or a Time object and a number.
@@ -48,19 +50,18 @@ class Time:
     def add_time(self, other):
         """Adds two time objects."""
         assert self.is_valid() and other.is_valid()
-        seconds = self.time_to_int() + other.time_to_int()
+        seconds = self.seconds + other.seconds
         return int_to_time(seconds)
 
     def increment(self, seconds):
         """Returns a new Time that is the sum of this time and seconds."""
-        seconds += self.time_to_int()
+        seconds += self.seconds
         return int_to_time(seconds)
 
     def is_valid(self):
         """Checks whether a Time object satisfies the invariants."""
-        if self.hour < 0 or self.minute < 0 or self.second < 0:
-            return False
-        if self.minute >= 60 or self.second >= 60:
+
+        if self.seconds < 0 or self.seconds >= 24*60*60:
             return False
         return True
 
@@ -69,10 +70,8 @@ def int_to_time(seconds):
     """Makes a new Time object.
     seconds: int seconds since midnight.
     """
-    minutes, second = divmod(seconds, 60)
-    hour, minute = divmod(minutes, 60)
-    time = Time(hour, minute, second)
-    return time
+
+    return Time(0, 0, seconds)
 
 
 def main():
@@ -97,8 +96,11 @@ def main():
 
     print('Example of polymorphism')
     t1 = Time(7, 43)
+
     t2 = Time(7, 41)
+
     t3 = Time(7, 37)
+
     total = sum([t1, t2, t3])
     print(total)
 
