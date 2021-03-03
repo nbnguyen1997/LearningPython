@@ -103,8 +103,9 @@ class Hand(Deck):
     def __init__(self, label=""):
         self.__cards = []
         self.__label = label
-        self.__rank_hist = ()
-        self.__suit_hist = ()
+        self.__rank_hist = {}
+        self.__suit_hist = {}
+        self.__classify = {}
 
     def set_card(self, card):
         if isinstance(card, Card):
@@ -117,20 +118,23 @@ class Hand(Deck):
 
     def __str__(self):
         self.__cards.sort()
-        return self.__label + ":\n\t" + "\n\t".join(str(item) for item in self.__cards) + self.poker_hand()
+        # self.poker_hand()
+        return self.__label + ":\n\t" + "\n\t".join(str(item) for item in self.__cards) + "\n\t\t" + self.classify()
 
     def poker_hand(self):
-        return "\n\t\tPair: %r\n\t\tTwo pair: %r\n\t\tThree: %r\n\t\tFlush: %r\n\t\tFull house: %r\n\t\tFour: %r\n" % (self.has_pair(), self.has_twopair(), self.has_three(), self.has_flush(), self.has_fullhouse(), self.has_four())
+        # return "\n\t\tPair: %r\n\t\tTwo pair: %r\n\t\tThree: %r\n\t\tFlush: %r\n\t\tFull house: %r\n\t\tFour: %r\n" % (self.has_pair(), self.has_twopair(), self.has_three(), self.has_flush(), self.has_fullhouse(), self.has_four())
+        self.classify_hist()
+        return "\n\t\t"+"\n\t\t".join(str(item) for item in list(self.__classify.items()))
 
     def suit_hist(self):
-        self.__suit_hist = dict()
+        # self.__suit_hist = dict()
 
         for card in self.__cards:
             self.__suit_hist[card.get_suit] = self.__suit_hist.get(
                 card.get_suit, 0) + 1
 
     def rank_hist(self):
-        self.__rank_hist = dict()
+        # self.__rank_hist = dict()
 
         for card in self.__cards:
             self.__rank_hist[card.get_rank()] = self.__rank_hist.get(
@@ -182,3 +186,26 @@ class Hand(Deck):
 
     def has_fullhouse(self):
         return self.find_criteria_card(3, 2)
+
+    def classify_hist(self):
+        hist = {
+            "Pair": self.has_pair(),
+            "Two pair": self.has_twopair(),
+            "Three": self.has_three(),
+            "Flush": self.has_flush(),
+            "Full house": self.has_fullhouse(),
+            "Four": self.has_four()
+        }
+        self.__classify = hist
+
+    def classify(self):
+        if len(self.__classify) == 0:
+            self.classify_hist()
+        result = "High card"
+        for key in list_classify:
+            if self.__classify[key] == True:
+                result = key
+        return result
+
+
+list_classify = ["Pair", "Two pair", "Three", "Flush", "Full house", "Four"]
