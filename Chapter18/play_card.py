@@ -130,8 +130,8 @@ class Hand(Deck):
         # self.__suit_hist = dict()
 
         for card in self.__cards:
-            self.__suit_hist[card.get_suit] = self.__suit_hist.get(
-                card.get_suit, 0) + 1
+            self.__suit_hist[card.get_suit()] = self.__suit_hist.get(
+                card.get_suit(), 0) + 1
 
     def rank_hist(self):
         # self.__rank_hist = dict()
