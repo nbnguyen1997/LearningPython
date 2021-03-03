@@ -5,15 +5,33 @@ from Card import Card
 
 class Card:
     def __init__(self, rank_id, suit_id):
-        self.rank = rank_id
-        self.suit = suit_id
+        self.__rank = rank_id
+        self.__suit = suit_id
+
+    def set_rank(self, rank):
+        if rank not in range(1, 14):
+            raise ValueError("ValueError exception thrown")
+        else:
+            self.__rank = rank
+
+    def get_rank(self):
+        return self.__rank
+
+    def set_suit(self, suit):
+        if suit not in range(0, 4):
+            raise ValueError("ValueError exception thrown")
+        else:
+            self.__suit = suit
+
+    def get_suit(self):
+        return self.__suit
 
     def __str__(self):
-        return "%s of %s" % (rank_names[self.rank], suit_names[self.suit])
+        return "%s of %s" % (rank_names[self.__rank], suit_names[self.__suit])
 
     def __lt__(self, other):
-        t1 = self.rank, self.suit
-        t2 = other.rank, other.suit
+        t1 = self.__rank, self.__suit
+        t2 = other.get_rank, other.get_suit
 
         return t1 < t2
 
@@ -25,27 +43,36 @@ rank_names = [None, "Ace", "2", "3", "4", "5", "6",
 
 class Deck:
     def __init__(self):
-        self.cards = []
+        self.__cards = []
         for suit in range(0, 4):
             for rank in range(1, 14):
                 card = Card(rank, suit)
-                self.cards.append(card)
+                self.set_card(card)
+
+    def set_card(self, card):
+        if isinstance(card, Card):
+            self.__cards.append(card)
+        else:
+            raise TypeError("TypeError exception thrown")
+
+    def get_cards(self):
+        return self.__cards
 
     def __str__(self):
         return "\n".join(str(item) for item in
-                         self.cards)
+                         self.__cards)
 
     def pop_card(self):
-        return self.cards.pop()
+        return self.__cards.pop()
 
     def add_card(self, card):
-        self.cards.append(card)
+        self.set_card(card)
 
     def shuffle_card(self):
-        random.shuffle(self.cards)
+        random.shuffle(self.__cards)
 
     def sort_card(self):
-        self.cards.sort()
+        self.__cards.sort()
 
     def move_card(self, hand, num):
         if isinstance(hand, Deck):
@@ -72,8 +99,17 @@ class Deck:
 
 class Hand(Deck):
     def __init__(self, label=""):
-        self.cards = []
-        self.label = label
+        self.__cards = []
+        self.__label = label
+
+    def set_card(self, card):
+        if isinstance(card, Card):
+            self.__cards.append(card)
+        else:
+            raise TypeError("TypeError exception thrown")
+
+    def get_cards(self):
+        return self.__cards
 
     def __str__(self):
-        return self.label + ":\n\t" + "\n\t".join(str(item) for item in self.cards)
+        return self.__label + ":\n\t" + "\n\t".join(str(item) for item in self.__cards)
