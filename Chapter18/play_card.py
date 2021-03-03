@@ -31,7 +31,7 @@ class Card:
 
     def __lt__(self, other):
         t1 = self.__rank, self.__suit
-        t2 = other.get_rank, other.get_suit
+        t2 = other.get_rank(), other.get_suit()
 
         return t1 < t2
 
@@ -103,6 +103,8 @@ class Hand(Deck):
     def __init__(self, label=""):
         self.__cards = []
         self.__label = label
+        self.__rank_hist = ()
+        self.__suit_hist = ()
 
     def set_card(self, card):
         if isinstance(card, Card):
@@ -114,7 +116,11 @@ class Hand(Deck):
         return self.__cards
 
     def __str__(self):
-        return self.__label + ":\n\t" + "\n\t".join(str(item) for item in self.__cards)
+        self.__cards.sort()
+        return self.__label + ":\n\t" + "\n\t".join(str(item) for item in self.__cards) + self.poker_hand()
+
+    def poker_hand(self):
+        return "\n\t\tPair: %r\n\t\tTwo pair: %r\n\t\tThree: %r\n\t\tFlush: %r\n\t\tFull house: %r\n\t\tFour: %r\n" % (self.has_pair(), self.has_twopair(), self.has_three(), self.has_flush(), self.has_fullhouse(), self.has_four())
 
     def suit_hist(self):
         self.__suit_hist = dict()
@@ -123,6 +129,37 @@ class Hand(Deck):
             self.__suit_hist[card.get_suit] = self.__suit_hist.get(
                 card.get_suit, 0) + 1
 
+    def rank_hist(self):
+        self.__rank_hist = dict()
+
+        for card in self.__cards:
+            self.__rank_hist[card.get_rank()] = self.__rank_hist.get(
+                card.get_rank(), 0) + 1
+
+    def find_criteria_card(self, *number_card):
+        result = []
+
+        if len(self.__rank_hist) == 0:
+            self.rank_hist()
+        list_left_over = list(self.__rank_hist.values())
+        list_left_over.sort()
+        list_num = list(number_card)
+        list_num.sort()
+        for num in list_num:
+            res = self.find_num(list_left_over, num)
+            if res == None:
+                return False
+            else:
+                list_left_over.remove(res)
+        return True
+
+    def find_num(self, list_num, num):
+        for val in list_num:
+            # Truong hop tim thay 3(hoac 4) cay cung loai thi has_pair() van dung
+            if val >= num:
+                return val
+        return None
+
     def has_flush(self):
         self.suit_hist()
         for val in self.__suit_hist.values():
@@ -130,3 +167,18 @@ class Hand(Deck):
                 return True
 
         return False
+
+    def has_pair(self):
+        return self.find_criteria_card(2)
+
+    def has_twopair(self):
+        return self.find_criteria_card(2, 2)
+
+    def has_three(self):
+        return self.find_criteria_card(3)
+
+    def has_four(self):
+        return self.find_criteria_card(4)
+
+    def has_fullhouse(self):
+        return self.find_criteria_card(3, 2)

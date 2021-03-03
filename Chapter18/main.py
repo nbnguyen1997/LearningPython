@@ -13,6 +13,6 @@ for item in list_hand:
     #     print("\t", i)
     # print()
     print(item)
-    print("Have contains a flush: ", item.has_flush())
+    # print("Have contains a flush: ", item.has_flush())
 
-print(de)
+# print(de)
