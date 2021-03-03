@@ -1,8 +1,11 @@
 from play_card import Card, Deck, Hand
 
+
 de = Deck()
 de.shuffle_card()
-list_hand = de.deal_hands(4, 13)
+num_hands = input("Enter number player: ")
+
+list_hand = de.deal_hands(int(num_hands), 7)
 
 for item in list_hand:
     # print(item["label"])
@@ -10,3 +13,6 @@ for item in list_hand:
     #     print("\t", i)
     # print()
     print(item)
+    print("Have contains a flush: ", item.has_flush())
+
+print(de)
