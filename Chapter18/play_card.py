@@ -71,10 +71,10 @@ class Deck:
     def shuffle_card(self):
         random.shuffle(self.__cards)
 
-    def sort_card(self):
+    def sort(self):
         self.__cards.sort()
 
-    def move_card(self, hand, num):
+    def move_cards(self, hand, num):
         if isinstance(hand, Deck):
             for i in range(num):
                 hand.add_card(self.pop_card())
@@ -82,6 +82,8 @@ class Deck:
             hand["cards"].append(self.pop_card())
 
     def deal_hands(self, num_hands, num_cards_per_hand):
+        if num_hands * num_cards_per_hand > 52:
+            raise ValueError("ValueError exception thrown")
         hands = []
         for hand_id in range(num_hands):
             # hand = dict()  # because we cannot call the Hand class
@@ -92,7 +94,7 @@ class Deck:
 
         for i in range(num_cards_per_hand):
             for hand in hands:
-                self.move_card(hand, 1)
+                self.move_cards(hand, 1)
 
         return hands
 
@@ -113,3 +115,18 @@ class Hand(Deck):
 
     def __str__(self):
         return self.__label + ":\n\t" + "\n\t".join(str(item) for item in self.__cards)
+
+    def suit_hist(self):
+        self.__suit_hist = dict()
+
+        for card in self.__cards:
+            self.__suit_hist[card.get_suit] = self.__suit_hist.get(
+                card.get_suit, 0) + 1
+
+    def has_flush(self):
+        self.suit_hist()
+        for val in self.__suit_hist.values():
+            if val >= 5:
+                return True
+
+        return False
