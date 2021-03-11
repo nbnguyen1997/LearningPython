@@ -1,14 +1,20 @@
 def check_fermat(a, b, c, n):
-    if n > 2 and (a**n + b**n == c**n):
-        print("Holy smokes, Fermat was wrong!")
-    else:
-        print("No, that doesn’t work.")
+    if n >= 2 and (a**n + b**n == c**n):
+        return True
+
+    return False
+
 
 def check_numbers():
     a = int(input("Choose a number for a: "))
     b = int(input("Choose a number for b: "))
     c = int(input("Choose a number for c: "))
     n = int(input("Choose a number for n: "))
-    return check_fermat(a, b, c, n)
+    if check_fermat(a, b, c, n):
+        print("Holy smokes, Fermat was wrong!")
+    else:
+        print("No, that doesn’t work.")
 
-check_numbers()
+
+if __name__ == "__main__":
+    check_numbers()
