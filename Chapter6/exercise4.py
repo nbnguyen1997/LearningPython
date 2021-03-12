@@ -10,17 +10,12 @@ def is_power(a, b):
     """
         returns True if a is a power of b
     """
-    if a == 0 and b == 0:
+    if a == 0 and b == 0 or a == b or a == 1:
         return True
     if b == 0 and a != 0:
         return False
     if a % b == 0:
-        if(a/b == 1):
-            return True
-        else:
-            return is_power(a/b, b)
-    if b**0 == a:
-        return True
+        return is_power(a/b, b)
 
     return False
 

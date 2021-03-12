@@ -1,5 +1,8 @@
 import math
 def mysqrt(a):
+    """
+    returns an estimate of the square root of a
+    """
     x = a / 2 + 1
     while True:
         y = ( x + a / x) / 2
@@ -33,5 +36,5 @@ def test_square_root():
     for i in range(1,10):
         show_result(stt=i,mysqrt=mysqrt(i),math_sqrt=math.sqrt(i),diff=abs(mysqrt(i)-math.sqrt(i)))
         # print(i,"\t",mysqrt(i),"\t\t",math.sqrt(i),"\t\t",abs(mysqrt(i)-math.sqrt(i)))
-
-test_square_root()
+if __name__ == "__main__":
+    test_square_root()

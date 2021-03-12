@@ -1,6 +1,15 @@
 def rotate_word(string,number):
+    """[returns the string after rotating]
+
+    Args:
+        string ([string]): [string to rotating]
+        number ([number]): [number step to rotate]
+
+    Returns:
+        [string]
+
+    """
     numer_index = 0
-    number_step = 0
     result=""
     for item in string:
         number_char = ord(item)
@@ -21,4 +30,5 @@ def function_input():
 
     print(rotate_word(string=string,number=number))
 
-function_input()
+if __name__=="__main__":
+    function_input()

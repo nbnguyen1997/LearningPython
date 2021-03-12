@@ -1,7 +1,3 @@
-# print(os.path.curdir)
-# print(os.path.isdir("."))
-
-# fin = open('D:\Python\Example\Exercise\Chapter9\words.txt')
 fin = open('.\Chapter9\words.txt')
 
 

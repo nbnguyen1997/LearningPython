@@ -2,11 +2,18 @@
     "python.testing.unittestArgs": [
         "-v",
         "-s",
-        "./Chapter5",
+        ".",
         "-p",
         "test_*.py"
     ],
     "python.testing.pytestEnabled": false,
     "python.testing.nosetestsEnabled": false,
-    "python.testing.unittestEnabled": true
+    "python.testing.unittestEnabled": true,
+    "editor.autoClosingQuotes": "always",
+    "editor.autoClosingBrackets": "always",
+    "editor.mouseWheelZoom": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "debug.inlineValues": true,
+    "debug.showBreakpointsInOverviewRuler": true
 }

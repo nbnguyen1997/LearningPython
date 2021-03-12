@@ -1,44 +1,31 @@
 def handling_string(string):
-    temp = string.lower()
-    result=''
-    for letter in temp:
-        if is_exit_letter(letter,result):
-            pass
-        else:
-            result+= letter
-    
+    temp = "".join(string.split()).lower()
+    result = ''.join({letter for letter in temp})
+
     return result
 
-def is_exit_letter(letter,string):
-    for item in string:
-        if item == letter or item == letter.lower():
-            return True
-    
-    return False
 
-def avoids(word,forbidden_letter):
+def avoids(word, forbidden_letter):
+    """
+    Returns True if the word doesn’t use any of the forbidden letters.
+    """
     for letter in word:
-        if is_exit_letter(letter,forbidden_letter):
+        if letter in forbidden_letter:
             return False
     return True
 
-def check_input_word(string):
-    temp = string.strip()
-    resutl=''
-    for item in temp:
-        if item == ' ':
-            break
-        resutl+=item
-    return resutl
-
 
 def check_input():
-    string_forbidden_letter = handling_string(input("Enter string of forbidden letters: "))
+    string_forbidden_letter = handling_string(
+        input("Enter string of forbidden letters: "))
 
     while True:
-        word = check_input_word(input("Enter word ('done' to quick):"))
+        word = "".join(
+            (input("Enter word ('done' to quick):")).split()).lower()
         if word == 'done' or word == 'Done':
             break
-        print(avoids(word,string_forbidden_letter))
-    
-check_input()
+        print(avoids(word, string_forbidden_letter))
+
+
+if __name__ == "__main__":
+    check_input()
