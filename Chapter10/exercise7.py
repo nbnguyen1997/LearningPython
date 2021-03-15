@@ -1,8 +1,13 @@
 def has_duplicates(t):
-    for i in range(len(t)-1):
-        for j in range(i+1,len(t)):
-            if t[i] == t[j]:
-                return True
-    return False
+    """
+    Takes a list and returns True if there is any element that appears more than once
+    """
+    temp = t
+    temp.sort()
 
-print(has_duplicates([1,2,3,4,5,4]))
+    return any(temp[index] == temp[index+1] for index in range(len(temp)-1))
+
+
+if __name__ == "__main__":
+    print(has_duplicates([1, 2, 3, 4, 5, 4]))
+    print(has_duplicates(['a', 'b', 'c', 'd', 'b']))

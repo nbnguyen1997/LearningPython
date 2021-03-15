@@ -1,13 +1,11 @@
 import random
 
+
 def has_duplicates(t):
     s = t[:]
     s.sort()
 
-    for i in range(len(s)-1):
-        if s[i] == s[i+1]:
-            return True
-    return False
+    return any(s[index] == s[index+1] for index in range(len(s) - 1))
 
 
 def random_bdays(n):
@@ -38,4 +36,5 @@ def main():
     print('there were %d simulations with at least one match' % count)
 
 
-main()
+if __name__ == "__main__":
+    main()

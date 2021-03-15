@@ -1,5 +1,3 @@
-cache = dict()
-
 def ackermann(m, n):
     if m == 0:
         return n+1
@@ -13,5 +11,12 @@ def ackermann(m, n):
         return cache[key_string]
 
 
-print(ackermann(3, 4))
-print(ackermann(3, 6))
+def main():
+
+    print(ackermann(3, 4))
+    print(ackermann(3, 6))
+
+
+if __name__ == "__main__":
+    global cache
+    main()

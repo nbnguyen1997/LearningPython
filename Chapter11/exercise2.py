@@ -6,11 +6,15 @@ def invert_dict(d):
     return inverse
 
 
+def main():
+    d = dict(a=1, b=2, c=3, z=1)
 
-d = dict(a=1, b=2, c=3, z=1)
+    inverse = invert_dict(d)
 
-inverse = invert_dict(d)
+    for val in inverse:
+        keys = inverse[val]
+        print(val, keys)
 
-for val in inverse:
-    keys = inverse[val]
-    print(val, keys)
+
+if __name__ == "__main__":
+    main()
